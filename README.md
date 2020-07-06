@@ -7,7 +7,7 @@ Finished Features:
 
 1.Thread Scheduling/Priority and CPU Clocks
 
-2.TFT & OLED Screen Display
+2.TFT (ILI9341) & OLED (12864) Screen Display
 
 3.System Clock
 
@@ -17,7 +17,7 @@ Finished Features:
 
 6.ESP8266 WiFi Communication
 
-7.Camera Capture & Display
+7.Camera Capture & Display (OV7670)
 
 
 
