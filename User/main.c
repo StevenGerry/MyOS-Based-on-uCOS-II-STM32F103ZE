@@ -15,6 +15,8 @@
 #include "user_usart.h"
 #include "user_iic.h"	
 #include "ds18b20.h"
+#include <stdio.h>
+#include <string.h>
 
 
 static OS_STK taskbutton_stk[TASKBTN_STK_SIZE];
@@ -36,17 +38,20 @@ void delay(__IO u32 nCount);
 int MENU_STATUS=-1;
 int CLR=1;
 int CAMERA_SIGN=0;
+int rcv_len = 0;
 
 uint8_t	i;
 uint8_t strTemp[5];
 uint8_t strTemp2[5];
 uint8_t strHumi[5];
+uint8_t U8_RCVLOG[5];
 float fTemp;
 float temp;
 float humi;
 char  strtemp[5];
 char  strtemp2[5];
 char  strhumi[5];
+char  RCVLOG[255];
 
 extern uint8_t frame_flag;
 
@@ -199,6 +204,7 @@ void taskbutton(void *p_arg)
 					while(GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_1) != 0 )
           {
 						MENU_STATUS=0;
+						LCD_P8x16Str(1,4,"WiFi: On    ");
 						GPIO_SetBits(GPIOF, GPIO_Pin_12);
           } 
 					GPIO_ResetBits(GPIOF,GPIO_Pin_12);
@@ -219,15 +225,19 @@ void taskwifi(void *p_arg)
 		OSTimeDly(50);
 		if(Hand("LEDON"))
 			{
+				  LCD_P8x16Str(1,4,"WiFi: On  R ");
 					USART_ITConfig(USART3, USART_IT_RXNE, DISABLE);
 					led_on(LED_3);
-					CLR_Buf();		
+					strcat(RCVLOG,"LEDON//");
+					CLR_Buf();
 					USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);				
 			}  
 			else if(Hand("LEDOFF"))
 			{
+					LCD_P8x16Str(1,4,"WiFi: On  R ");
 					USART_ITConfig(USART3, USART_IT_RXNE, DISABLE);
 					led_off(LED_3);
+					strcat(RCVLOG,"LEDOFF//");
 					CLR_Buf();
 					USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);	
 			}
@@ -351,11 +361,36 @@ void tasklcd1(void *p_arg)
 				LCD_Clear(0, 20, 240, 320, BACKGROUND);
 				CLR=1;
 			}
+			rcv_len = strlen(RCVLOG);
 			LCD_DispStr(0, 0, (uint8_t *)" Welcome! GERRY SYSTEM uC/OS-II BasedOS ", CYAN);
 			LCD_DispStr(0, 20, (uint8_t *)"             DATA TRANSFER              ", CYAN);
 			LCD_DispStr(0, 30, (uint8_t *)"----------------------------------------", CYAN);
 			LCD_DispStr(0, 50, (uint8_t *)"RECEIVE LOG:----------------------------", CYAN);
 			LCD_DispStr(0, 160, (uint8_t *)"SENDINF LOG:----------------------------", CYAN);
+			LCD_DispStr(0, 260, (uint8_t *)"PRESS S1 TO CLEAR LOG", CYAN);
+			for(i=0; i<rcv_len; i++)
+			{
+				U8_RCVLOG[i]=(uint8_t)RCVLOG[i];    
+			}
+			LCD_DispStr(0, 70, (uint8_t *)U8_RCVLOG, YELLOW);
+			if(GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_2) == 0)  
+			{	 
+			  sw_delay_ms(10);
+        if(GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_2) == 0 )
+        {
+		      led_on(LED_1); 
+		      while(GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_2) == 0 )
+          {
+						strcpy(RCVLOG," ");
+						for(i=0; i<rcv_len; i++)
+						{
+							U8_RCVLOG[i]=' ';
+						}
+						rcv_len=0;
+          }       
+          led_off(LED_1); 			
+        }
+			}
 			//LCD_DispChar(60, 60, 'A', BLUE);
 			//LCD_DispStr(40, 100, (uint8_t *)"count:", WHITE);
 		}
@@ -486,7 +521,7 @@ int main(void)
 		  sw_delay_ms(500);
 	}
   CLR_Buf();
-	led_on(LED_3); 
+	led_off(LED_3); 
 	
 	//Screen clear
 	OLED_Fill(0x00);
