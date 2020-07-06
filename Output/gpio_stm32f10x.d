@@ -1,0 +1,15 @@
+..\..\output\gpio_stm32f10x.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\RTE_Driver\GPIO_STM32F10x.c
+..\..\output\gpio_stm32f10x.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\RTE_Driver\GPIO_STM32F10x.h
+..\..\output\gpio_stm32f10x.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+..\..\output\gpio_stm32f10x.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h
+..\..\output\gpio_stm32f10x.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm3.h
+..\..\output\gpio_stm32f10x.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\gpio_stm32f10x.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h
+..\..\output\gpio_stm32f10x.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h
+..\..\output\gpio_stm32f10x.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h
+..\..\output\gpio_stm32f10x.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h
+..\..\output\gpio_stm32f10x.o: ..\..\User\stm32f10x_conf.h
+..\..\output\gpio_stm32f10x.o: ..\..\Libraries\FWlib\inc\stm32f10x_gpio.h
+..\..\output\gpio_stm32f10x.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h
+..\..\output\gpio_stm32f10x.o: ..\..\Libraries\FWlib\inc\stm32f10x_rcc.h
+..\..\output\gpio_stm32f10x.o: ..\..\Libraries\FWlib\inc\misc.h
