@@ -1,7 +1,11 @@
 # MyOS-Based-on-uCOS-II-STM32F103ZE
 Tiny Embeded System Based on μC/OS-II Using STM32F103ZET6(IKMSIK Model) / Running for Learning and Testing
 
+________________________
+
 2020.7.6 First Version
+
+________________________
 
 Finished Features:
 
@@ -20,7 +24,7 @@ Finished Features:
 7.Camera Capture & Display (OV7670)
 
 
-
+________________________
 
 
 To Be Completed:
@@ -29,6 +33,7 @@ To Be Completed:
 
 2.Data Transfer
 
+________________________
 
 PS: This project is based on ARM Keil5, check IDE version.
 
