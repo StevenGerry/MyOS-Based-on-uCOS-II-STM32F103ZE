@@ -17,13 +17,14 @@
 #include "ds18b20.h"
 #include <stdio.h>
 #include <string.h>
+//#include "mpu6050.h"
 
 
 static OS_STK taskbutton_stk[TASKBTN_STK_SIZE];
 static OS_STK taskwifi_stk[TASKWIFI_STK_SIZE];
 static OS_STK tasklcd1_stk[TASKLCD1_STK_SIZE];
 static OS_STK tasktime_stk[TASKTIME_STK_SIZE];
-static OS_STK tasktemp_stk[TASKTEMP_STK_SIZE];
+static OS_STK tasksens_stk[TASKSENS_STK_SIZE];
 
 void led_config(void);
 void GPIO_Config(void);
@@ -32,7 +33,7 @@ static void taskbutton(void*p_arg);
 static void tasklcd1(void*p_arg);
 static void taskwifi(void*p_arg);
 static void tasktime(void*p_arg);
-static void tasktemp(void*p_arg);
+static void tasksens(void*p_arg);
 void delay(__IO u32 nCount);
 
 int MENU_STATUS=-1;
@@ -41,17 +42,16 @@ int CAMERA_SIGN=0;
 int rcv_len = 0;
 
 uint8_t	i;
-uint8_t strTemp[5];
-uint8_t strTemp2[5];
-uint8_t strHumi[5];
 uint8_t U8_RCVLOG[5];
-float fTemp;
-float temp;
-float humi;
-char  strtemp[5];
-char  strtemp2[5];
-char  strhumi[5];
 char  RCVLOG[255];
+
+int16_t a,b,c,d,e,f;
+uint8_t pa[5];
+uint8_t pb[5];
+uint8_t pc[5];
+uint8_t pd[5];
+uint8_t pe[5];
+uint8_t pf[5];
 
 extern uint8_t frame_flag;
 
@@ -67,7 +67,7 @@ static void startup_task()
 	OSTaskCreate(taskwifi, (void *)0, &taskwifi_stk[TASKWIFI_STK_SIZE - 1], 8);
 	OSTaskCreate(tasktime, (void *)0, &tasktime_stk[TASKTIME_STK_SIZE - 1], 9);
 	OSTaskCreate(tasklcd1, (void *)0, &tasklcd1_stk[TASKLCD1_STK_SIZE - 1], 10);
-	OSTaskCreate(tasktemp, (void *)0, &tasktemp_stk[TASKTEMP_STK_SIZE - 1], 11);
+	OSTaskCreate(tasksens, (void *)0, &tasksens_stk[TASKSENS_STK_SIZE - 1], 6);
 	//OSTaskDel(OS_PRIO_SELF);
 }
 
@@ -290,6 +290,14 @@ void tasktime(void *p_arg)
 		led_on(LED_4);
 		delay(0x00ffef);
 		led_off(LED_4);
+		USART1_SendStr((u8*)"System Running");
+		USART1_SendByte(32); 
+		USART1_SendStr((u8*)phh);
+		USART1_SendByte(32); 
+		USART1_SendStr((u8*)pmm);
+		USART1_SendByte(32); 
+		USART1_SendStr((u8*)pss);  
+		USART1_SendByte(45);
 		OSTimeDly(900);
 	}
 }
@@ -342,17 +350,12 @@ void tasklcd1(void *p_arg)
 				LCD_Clear(0, 20, 240, 320, BACKGROUND);
 				CLR=1;
 			}
-			sprintf(strtemp, "%.01f", fTemp);
-			for(i=0; i<5; i++)
-			{
-				strTemp[i]=(uint8_t)strtemp[i];    
-			}
+			
 			LCD_DispStr(0, 0, (uint8_t *)" Welcome! GERRY SYSTEM uC/OS-II BasedOS ", CYAN);
 			LCD_DispStr(0, 20, (uint8_t *)"              SENSOR DATA               ", CYAN);
 			LCD_DispStr(0, 30, (uint8_t *)"----------------------------------------", CYAN);
-			LCD_DispStr(0, 70, (uint8_t *)"TEMPERATURE-DS18B20:", CYAN);
-			LCD_DispStr(125, 70, (uint8_t *)strTemp, YELLOW);
-			//LCD_DispStr(40, 100, (uint8_t *)"count:", WHITE);
+			LCD_DispStr(0, 70, (uint8_t *)"  MPU6050 XYZ:", CYAN);
+			LCD_DispStr(100, 90, (uint8_t *)a, YELLOW);
 		}
 		else if(MENU_STATUS==2)
 		{	
@@ -366,8 +369,8 @@ void tasklcd1(void *p_arg)
 			LCD_DispStr(0, 20, (uint8_t *)"             DATA TRANSFER              ", CYAN);
 			LCD_DispStr(0, 30, (uint8_t *)"----------------------------------------", CYAN);
 			LCD_DispStr(0, 50, (uint8_t *)"RECEIVE LOG:----------------------------", CYAN);
-			LCD_DispStr(0, 160, (uint8_t *)"SENDINF LOG:----------------------------", CYAN);
-			LCD_DispStr(0, 260, (uint8_t *)"PRESS S1 TO CLEAR LOG", CYAN);
+			LCD_DispStr(0, 170, (uint8_t *)"SENDINF LOG:----------------------------", CYAN);
+			LCD_DispStr(0, 300, (uint8_t *)"PRESS S1 TO CLEAR LOG", CYAN);
 			for(i=0; i<rcv_len; i++)
 			{
 				U8_RCVLOG[i]=(uint8_t)RCVLOG[i];    
@@ -423,17 +426,11 @@ void tasklcd1(void *p_arg)
 	}
 }
 
-void tasktemp(void *p_arg)
+void tasksens(void *p_arg)
 {
 	while(1)
 	{
-		fTemp = DS18B20_Get_Temp();
-		sw_delay_ms(850);
-		delay(0x04ffef);
-		led_on(LED_4);
-		delay(0x04ffef);
-		led_off(LED_4);
-		OSTimeDly(1000);
+		OSTimeDly(2500);
 	}
 }
 
@@ -453,12 +450,8 @@ int main(void)
   OLED_Init();
 	LCD_Init();	
 	USART1_Init();
-	IIC_GPIO_Init(); 	
-	while(DS18B20_Init())
-	{
-      LCD_P8x16Str(48,0,"CHECK");
-      LCD_P8x16Str(0,6,"Sensor ERROR!");
-	}
+  //InitMPU6050();   
+  sw_delay_ms(100);
 	
 	//Screen Test
 	OLED_Fill(0xff);
@@ -514,12 +507,14 @@ int main(void)
 		  sw_delay_ms(500);
 	}
   CLR_Buf();
+	
 	while(!(Hand("OK")))
 	{		
 		  printf("AT+CIFSR\r\n");
 			LCD_P8x16Str(1,2,"AT+CIFSR");
 		  sw_delay_ms(500);
 	}
+	
   CLR_Buf();
 	led_off(LED_3); 
 	

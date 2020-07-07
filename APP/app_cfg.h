@@ -12,4 +12,4 @@
 #define TASKLCD1_STK_SIZE 					128
 #define TASKWIFI_STK_SIZE 					128
 #define TASKTIME_STK_SIZE 					128
-#define TASKTEMP_STK_SIZE 					128
+#define TASKSENS_STK_SIZE 					256

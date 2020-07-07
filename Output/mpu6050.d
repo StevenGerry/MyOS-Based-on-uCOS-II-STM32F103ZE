@@ -1,0 +1,17 @@
+..\..\output\mpu6050.o: ..\..\User\bsp\mpu6050.C
+..\..\output\mpu6050.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h
+..\..\output\mpu6050.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm3.h
+..\..\output\mpu6050.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\..\output\mpu6050.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h
+..\..\output\mpu6050.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h
+..\..\output\mpu6050.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h
+..\..\output\mpu6050.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h
+..\..\output\mpu6050.o: ..\..\User\stm32f10x_conf.h
+..\..\output\mpu6050.o: ..\..\Libraries\FWlib\inc\stm32f10x_gpio.h
+..\..\output\mpu6050.o: C:\Users\gerhua01\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h
+..\..\output\mpu6050.o: ..\..\Libraries\FWlib\inc\stm32f10x_rcc.h
+..\..\output\mpu6050.o: ..\..\Libraries\FWlib\inc\misc.h
+..\..\output\mpu6050.o: ..\..\User\bsp\mpu6050.h
+..\..\output\mpu6050.o: ..\..\User\bsp\user_usart.h
+..\..\output\mpu6050.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\..\output\mpu6050.o: ..\..\User\bsp\delay.h

@@ -60,3 +60,28 @@ int fgetc_usart1(FILE *f)
 		return (int)USART_ReceiveData(USART1);
 }
 
+void USART1_SendByte(uint8_t byte)
+{
+	while(USART_GetFlagStatus(USART1,USART_FLAG_TC) != SET);
+	USART_SendData(USART1, byte);
+}
+
+
+void USART1_SendStr(uint8_t *str)
+{
+  while(0!=*str)
+	{
+    USART1_SendByte(*str);
+    str++;
+  }
+}
+
+
+void USART1_IRQHandler(void)
+{  
+  if(USART_GetITStatus(USART1,USART_IT_RXNE)!= RESET)
+  {  
+    USART_ClearITPendingBit(USART1, USART_IT_RXNE);
+  }  
+}
+

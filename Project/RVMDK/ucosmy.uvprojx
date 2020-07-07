@@ -671,14 +671,14 @@
               <FilePath>..\..\User\bsp\ds18b20.c</FilePath>
             </File>
             <File>
-              <FileName>user_iic.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\user_iic.c</FilePath>
-            </File>
-            <File>
               <FileName>user_usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\user_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050.C</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\mpu6050.C</FilePath>
             </File>
           </Files>
         </Group>

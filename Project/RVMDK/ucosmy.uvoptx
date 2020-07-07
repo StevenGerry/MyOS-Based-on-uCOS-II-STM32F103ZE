@@ -502,7 +502,7 @@
 
   <Group>
     <GroupName>UCOS/SRC</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -642,7 +642,7 @@
 
   <Group>
     <GroupName>UCOS/PORT</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -861,8 +861,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\User\bsp\user_iic.c</PathWithFileName>
-      <FilenameWithoutPath>user_iic.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\User\bsp\user_usart.c</PathWithFileName>
+      <FilenameWithoutPath>user_usart.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -873,8 +873,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\User\bsp\user_usart.c</PathWithFileName>
-      <FilenameWithoutPath>user_usart.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\User\bsp\mpu6050.C</PathWithFileName>
+      <FilenameWithoutPath>mpu6050.C</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
