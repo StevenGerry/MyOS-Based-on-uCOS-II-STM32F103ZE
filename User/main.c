@@ -425,12 +425,20 @@ void tasklcd1(void *p_arg)
 		}
 	}
 }
-
+//PRESSURE TEST
 void tasksens(void *p_arg)
 {
 	while(1)
 	{
-		OSTimeDly(2500);
+		float mul=0.0;
+		float a=112.2,b=62.6;
+		u32 ka=0;
+	
+		for(ka=0;ka<100000;ka++)
+		{
+		mul=a*b;
+		}
+		OSTimeDly(10);
 	}
 }
 
