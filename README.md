@@ -23,6 +23,8 @@ Finished Features:
 
 7.Camera Capture & Display (OV7670)
 
+8.Port Transfer (Baud Rate 19200)
+
 
 ________________________
 
