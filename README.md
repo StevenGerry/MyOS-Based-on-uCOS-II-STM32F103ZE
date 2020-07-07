@@ -25,6 +25,8 @@ Finished Features:
 
 8.Port Transfer (Baud Rate 19200)
 
+9.CPU Pressure Test Thread
+
 
 ________________________
 
